@@ -1,0 +1,19 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "name": "myblob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "files/{name}",
+      "connection": "BlockStorageAccount"
+    },
+    {
+      "name": "$return",
+      "type": "queue",
+      "direction":"out",
+      "queueName":"virusfound",
+      "connection": "QueueStorageAccount"
+    }
+  ]
+}

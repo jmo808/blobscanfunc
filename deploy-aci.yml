@@ -1,0 +1,38 @@
+apiVersion: 2018-06-01
+location: westus2
+name: blobAvScan
+properties:
+  containers:
+  - name: blobfuncscan
+    properties:
+      image: jjazzyj/blobscanfunc:latest
+      environmentVariables:
+        - "name": "AzureWebJobsStorage"
+          "secureValue": ""
+        - "name": "BlockStorageAccount"
+          "secureValue": ""
+        - "name": "QueueStorageAccount"
+          "secureValue": ""
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1
+      ports:
+      - port: 80
+  - name: clamav
+    properties:
+      image: mkodockx/docker-clamav:latest
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1
+      ports:
+      - port: 3310
+  osType: Linux
+  ipAddress:
+    type: Public
+    ports:
+    - protocol: tcp
+      port: '80'
+tags: null
+type: Microsoft.ContainerInstance/containerGroups
